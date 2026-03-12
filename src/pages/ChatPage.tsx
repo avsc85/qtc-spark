@@ -88,9 +88,9 @@ const ChatPage = () => {
                     : "glass-card rounded-bl-md"
                 }`}
               >
-                <ReactMarkdown className="prose prose-sm prose-invert max-w-none [&>p]:mb-1 [&>ul]:mt-1">
-                  {msg.content}
-                </ReactMarkdown>
+                <div className="prose prose-sm prose-invert max-w-none [&>p]:mb-1 [&>ul]:mt-1">
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                </div>
 
                 {/* Action Card */}
                 {msg.action && (
