@@ -17,6 +17,7 @@ const items = [
   { title: "Leads", url: "/leads", icon: Users },
   { title: "Contracts", url: "/contracts", icon: FileText },
   { title: "Invoices", url: "/invoices", icon: Receipt },
+  { title: "Templates", url: "/templates", icon: ClipboardList },
   { title: "AI Chat", url: "/chat", icon: Sparkles },
 ];
 
