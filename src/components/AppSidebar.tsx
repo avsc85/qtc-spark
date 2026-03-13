@@ -1,4 +1,4 @@
-import { LayoutGrid, Users, FileText, Receipt, Sparkles } from "lucide-react";
+import { LayoutGrid, Users, FileText, Receipt, Sparkles, ClipboardList } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
