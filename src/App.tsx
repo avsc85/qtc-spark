@@ -9,6 +9,7 @@ import LeadsPage from "@/pages/LeadsPage";
 import ContractsPage from "@/pages/ContractsPage";
 import InvoicesPage from "@/pages/InvoicesPage";
 import ChatPage from "@/pages/ChatPage";
+import TemplatesPage from "@/pages/TemplatesPage";
 import ESignPage from "@/pages/ESignPage";
 import NotFound from "@/pages/NotFound";
 
@@ -31,6 +32,7 @@ const App = () => (
                   <Route path="/leads" element={<LeadsPage />} />
                   <Route path="/contracts" element={<ContractsPage />} />
                   <Route path="/invoices" element={<InvoicesPage />} />
+                  <Route path="/templates" element={<TemplatesPage />} />
                   <Route path="/chat" element={<ChatPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
