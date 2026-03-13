@@ -9,6 +9,7 @@ import LeadsPage from "@/pages/LeadsPage";
 import ContractsPage from "@/pages/ContractsPage";
 import InvoicesPage from "@/pages/InvoicesPage";
 import ChatPage from "@/pages/ChatPage";
+import TemplatesPage from "@/pages/TemplatesPage";
 import ESignPage from "@/pages/ESignPage";
 import NotFound from "@/pages/NotFound";
 
