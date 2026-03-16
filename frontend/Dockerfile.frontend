@@ -1,0 +1,42 @@
+# Multi-stage Dockerfile for QTC Frontend (React + Vite)
+# Optimized for Google Cloud Run
+
+FROM node:18-alpine as builder
+
+WORKDIR /app
+
+# Copy package files
+COPY qtc-spark/package.json qtc-spark/bun.lockb ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source
+COPY qtc-spark/src ./src
+COPY qtc-spark/public ./public
+COPY qtc-spark/*.config.ts qtc-spark/tsconfig*.json ./
+
+# Build for production
+RUN npm run build
+
+# --- Production stage ---
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install serve to run the static build
+RUN npm install -g serve
+
+# Copy built app from builder
+COPY --from=builder /app/dist ./dist
+
+ENV PORT=8080
+
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:${PORT}/ || exit 1
+
+# Serve the built app
+CMD ["serve", "-s", "dist", "-l", "8080"]

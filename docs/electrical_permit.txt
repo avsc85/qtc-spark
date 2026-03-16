@@ -1,0 +1,59 @@
+ELECTRICAL PERMIT DESIGN SERVICE AGREEMENT
+
+PARTIES
+
+This Agreement is entered into between:
+Client: {{customer_name}}, located in {{city}}, California ("Client")
+and
+Designer: QTC Design Studio, a licensed design firm ("Designer").
+
+SCOPE OF WORK
+
+Designer agrees to provide the following electrical design and permit documentation
+services for the Client's project:
+
+1. Site visit and existing electrical conditions survey
+2. Electrical single-line diagram
+3. Electrical load calculations
+4. Panel schedule and circuit layout drawings
+5. Title 24 lighting compliance documentation (if applicable)
+6. Electrical permit plan check coordination and submittal
+7. Revisions in response to plan check comments (up to three rounds)
+8. Final permit-ready electrical drawings and documentation
+
+TOTAL CONTRACT VALUE: ${{quote_amount}}
+
+PAYMENT SCHEDULE
+
+Payment shall be made in three milestones as follows:
+
+Milestone 1 - Contract Signing:       33% due upon execution of this agreement
+Milestone 2 - Draft Plans Delivered:  33% due upon delivery of draft drawings
+Milestone 3 - Final Plans Delivered:  34% due upon delivery of final permit-ready documents
+
+Payments are due within 7 days of each milestone. Overdue balances accrue
+interest at 1.5% per month.
+
+TERMS AND CONDITIONS
+
+1. Client shall provide access to the property and all relevant electrical panels,
+   subpanels, and existing documentation within 5 business days of signing.
+2. If PG&E or utility coordination is required, Client is responsible for
+   submitting utility applications. Designer will provide supporting documentation.
+3. Solar PV design, EV charger integration, and smart home wiring design are not
+   included unless separately quoted in a written addendum.
+4. Designer is not responsible for delays caused by agency review timelines
+   or utility company processing times.
+5. Scope changes requested by Client will be subject to a written change order
+   and additional fees as agreed by both parties.
+6. Either party may terminate this Agreement with 14 days written notice.
+   Client owes Designer for all work completed through the termination date.
+7. This Agreement is governed by the laws of the State of California.
+
+SIGNATURES
+
+Client Signature: ____________________________  Date: ______________
+Printed Name: {{customer_name}}
+
+Designer Signature: __________________________  Date: ______________
+Printed Name: Authorized Representative, QTC Design Studio

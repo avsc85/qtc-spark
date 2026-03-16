@@ -1,0 +1,245 @@
+DRAFTING SERVICES AGREEMENT
+Home Addition
+================================================================================
+
+This Agreement is entered into on {{agreement_date}} between {{company_name}}
+(hereinafter "Drafter") and {{customer_name}} — {{customer_signatory}}
+(hereinafter "Customer" or "Owner").
+
+================================================================================
+PARTIES
+================================================================================
+
+CUSTOMER INFORMATION
+  Customer:   {{customer_name}}
+  Signatory:  {{customer_signatory}}
+  Address:    {{customer_address}}
+
+DRAFTER INFORMATION
+  Company:    {{company_name}}
+  Drafter:    {{company_drafter}}
+  Address:    {{company_address}}
+  Phone:      {{company_phone}}
+  Email:      {{company_email}}
+
+================================================================================
+PROJECT
+================================================================================
+
+Project Location: {{project_location}}
+
+The construction work is yet to begin and the customer is requesting drawings to
+obtain the necessary planning and building permits. The work will include the
+tasks outlined in Article A: Scope of Work, as follows:
+
+================================================================================
+ARTICLE A — SCOPE OF WORK (Home Addition)
+================================================================================
+
+The following items define the agreed scope of work for this home addition
+project. Any work not listed below falls outside the scope of this agreement and
+will require a separate signed Change Order.
+
+  ✓  1 Site Visit / Existing Conditions Assessment
+  ✓  Existing Floor Plan (as-built survey)
+  ✓  Site Plan (property boundaries, setbacks, existing structures)
+  ✓  Proposed Addition Floor Plan
+  ✓  Proposed Exterior Elevations (all affected sides)
+  ✓  Roof Plan (existing + proposed)
+  ✓  Building Sections (minimum 2 cross-sections)
+  ✓  Window & Door Schedule
+  ✓  Title 24 Energy Compliance Report
+  ✓  Structural Coordination Notes (structural engineer required separately)
+  ✓  Building Permit Drawing Set (permit-ready)
+  ✓  City Plan Check Coordination (up to 3 rounds of corrections)
+  ✓  Updates based on within-scope corrections from the city
+
+Note: Any work not listed above falls outside the scope of this agreement and
+will require a separate signed Change Order. Structural engineering drawings are
+NOT included and must be contracted separately with a licensed engineer.
+
+================================================================================
+ARTICLE B — TERMS AND CONDITIONS
+================================================================================
+
+1.  All project specifications and limitations are provided by the Customer(s)
+    upfront. The Drafter is only assisting in the drawings of the plans as set
+    forth in the Scope of Work. The Drafter shall perform its services consistent
+    with the ordinary standard of care exercised by similar professionals in
+    similar circumstances at the same time and locality.
+
+2.  Drafter is responsible only for design and drafting, and will try to best
+    assist Customers in obtaining permits for the scope of work mentioned above.
+    However, permits are subject to city inspection and code compliance, and city
+    decisions will not have any bearing on the successful completion of the
+    project. The Customer(s) are responsible for ensuring the safety and code
+    compliance of the structure as per local laws and building codes during or
+    after construction.
+
+3.  All drawings, plans, specifications, models, calculations, reports and other
+    documents prepared by {{company_name}} in connection with the Project
+    (collectively, the "Instruments of Service") are and shall remain the sole
+    and exclusive property of {{company_name}} and/or the Drafter, protected by
+    copyright and other intellectual property laws.
+    a.  Upon full and final payment of all fees due, the Customer is granted a
+        limited, non-exclusive, non-transferable license to use the Instruments
+        of Service solely for the purpose of constructing, permitting,
+        maintaining, and using the specific Project at the specific site
+        identified in this Agreement.
+    b.  Any use, modification, or re-use of the Instruments of Service without
+        written consent shall be at the sole risk of the Customer. The Customer
+        agrees to defend, indemnify, and hold harmless {{company_name}} from all
+        claims arising out of unauthorized use.
+    c.  Customer(s) allow drafters to use de-anonymized project output for
+        marketing purposes. The copyright of the drawings is owned by the
+        drafters.
+
+4.  All personal identification information of the Customers will remain
+    confidential with the drafters and will not be used for any purpose without
+    the Customer's prior consent.
+
+5.  Drafter will use reasonable safeguards but is not strictly liable for data
+    breaches beyond its reasonable control.
+
+6.  Payments due and not paid under the Contract Documents shall bear interest
+    from the date payment is due at an annual rate of 20 percent.
+
+7.  Three rounds of iterations and plan check corrections from the city are
+    included in the price. Any changes in scope as agreed at signing will require
+    a "Change Order" (See Term 13).
+
+8.  It is the Customer's responsibility to inform the drafter about feedback and
+    approval from the city within seven (7) days, especially when the event
+    triggers a payment.
+
+9.  Drafter will not be responsible for structural calculations or any work
+    specifically requiring an Architect or Engineering License. If required,
+    Drafter may coordinate with a licensed architect or engineer, acting solely
+    as a coordination agent.
+
+10. To the fullest extent permitted by law, the Customer agrees to defend,
+    indemnify, and hold harmless {{company_name}} and the Drafter from all
+    claims, demands, liabilities, losses, damages, costs, and expenses
+    (including reasonable attorneys' fees) arising out of or relating to:
+    a.  The construction, implementation, use, modification, or maintenance of
+        the Project;
+    b.  The use, misuse, or unauthorized re-use of any drawings, plans, or
+        deliverables prepared by the Drafter;
+    c.  Bodily injury, death, or damage to real or personal property occurring at
+        the Project site;
+    d.  Any failure by the Customer or their contractors to comply with
+        applicable laws, codes, or regulations;
+    e.  Any breach by the Customer of this Agreement.
+    This indemnity expressly includes claims made by third parties. The foregoing
+    indemnity shall not require indemnification where a claim is finally
+    determined to have been proximately caused by the gross negligence or willful
+    misconduct of the Indemnified Party.
+
+11. Drafter has no responsibility for construction means and methods, site
+    safety, or maintenance. The Customer and their contractor are solely
+    responsible for code compliance during and after construction.
+
+12. Drafter is not responsible for Fire and Sanitary Department permits or any
+    additional work beyond the Scope of Work.
+
+13. "Change Orders" resulting from extra work become part of the contract once
+    the order is prepared in writing and signed by both Parties prior to
+    commencement of any Work covered by the new Change Order.
+
+14. Drafter and Customer mutually commit to use reasonable care to meet the
+    requirements of state, federal, and local law. Drafter has no duty to update
+    drawings for changes in laws or codes after completion unless separately
+    engaged.
+
+15. Drawings and calculations are for one-time use at the specific site only.
+    Any re-use is prohibited. The customer shall defend, indemnify, and hold the
+    drafter harmless from any claims arising out of unauthorized use or re-use.
+
+16. The Customer is responsible for verifying all existing site conditions and
+    dimensions with their contractors before construction or material orders
+    begin. Design drawings are for reference only and must not be used for
+    construction without field verification.
+
+17. All plans will be delivered as PDF files via email — no hard copy will be
+    provided. Drafter is not responsible for email delivery failures or the
+    Customer's inability to open files.
+
+18. To the fullest extent permitted by law, the total aggregate liability of
+    {{company_name}} arising out of or relating to this Agreement shall be
+    limited to an amount not to exceed the total fees actually paid by the
+    Customer for the specific Project.
+    a.  In no event shall any of the {{company_name}} Parties be liable for any
+        indirect, special, incidental, consequential, exemplary, or punitive
+        damages of any kind.
+    b.  The Customer acknowledges that {{company_name}} has set its fees in
+        reliance upon this limitation of liability, which is an essential part
+        of the bargain between the parties.
+
+19. Both parties may terminate this agreement when unable to reach common ground.
+    Upon termination, the client shall reimburse the drafter for total hours
+    invested at USD $85/Hr, not to exceed the project price quoted in this
+    agreement.
+
+20. This proposal, as written, must be incorporated as part of the quotes
+    document in any resulting agreement.
+
+21. Unless otherwise provided, the Customer shall provide full information in a
+    timely manner regarding requirements for and limitations on the Project.
+
+22. No third-party claims or beneficiaries: This agreement solely benefits the
+    parties herein and their respective permitted successors.
+
+23. Relationship of parties: Nothing in this agreement creates any agency, joint
+    venture, partnership, or other form of joint enterprise or fiduciary
+    relationship between the parties.
+
+24. Drafter may slow or stop work, without liability or penalty, if payment has
+    not been received within ten (10) days of submission.
+
+25. All disputes arising under this Agreement are subject to the exclusive
+    jurisdiction of San Mateo County, California.
+
+================================================================================
+ARTICLE C — PRICING & PAYMENT SCHEDULE
+================================================================================
+
+The Customer shall pay the Drafter a total project fee of {{quote_amount}} upon
+receiving the set of drawings requested, based on the following payment schedule:
+
+  TOTAL PROJECT FEE: {{quote_amount}}
+
+  Milestone 1 — Contract Signing
+    Due:    {{milestone_1_amount}}
+    Trigger: Upon execution of this agreement
+
+  Milestone 2 — Draft Plans Delivered
+    Due:    {{milestone_2_amount}}
+    Trigger: Upon delivery of draft plan set for Customer review
+
+  Milestone 3 — Permit-Ready Set / Final Delivery
+    Due:    {{milestone_3_amount}}
+    Trigger: Upon delivery of permit-ready drawing set
+
+Optional Services: {{optional_services}}
+
+================================================================================
+SIGNATURES
+================================================================================
+
+This agreement is entered into as of the date written below.
+
+CUSTOMER / SIGNATORY
+  Name:       {{customer_signatory}} / {{customer_name}}
+  Signature:  ___________________________________
+  Date:       {{signature_date}}
+  Place:      ___________________________________
+
+DRAFTER / {{company_name}}
+  Name:       {{company_drafter}} / {{company_name}}
+  Signature:  ___________________________________
+  Date:       {{signature_date}}
+  Place:      ___________________________________
+
+================================================================================
+{{company_name}} | {{company_address}} | {{company_phone}} | {{company_email}}
+================================================================================

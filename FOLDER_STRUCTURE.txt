@@ -1,0 +1,216 @@
+════════════════════════════════════════════════════════════════════════════
+                    QTC PROJECT - ORGANIZED STRUCTURE
+════════════════════════════════════════════════════════════════════════════
+
+QTC app/
+│
+├── 📂 backend/                          ⭐ BACKEND SERVICES (Python/FastAPI)
+│   ├── 📄 main.py                       ← Start FastAPI server
+│   ├── 📄 requirements.txt              ← Python dependencies
+│   ├── 🐳 Dockerfile                   ← Backend container image
+│   ├── 📄 .dockerignore                ← Docker build optimization
+│   ├── 📄 setup-gcp.sh                 ← Automated GCP setup
+│   ├── 📄 deploy.sh                    ← Manual deployment script
+│   ├── 📄 .env.production.example      ← Production config template
+│   │
+│   ├── 📂 agents/                       ← AI Agent implementations
+│   │   ├── chat_agent.py
+│   │   ├── contract_agent.py
+│   │   ├── invoice_agent.py
+│   │   ├── lead_agent.py
+│   │   ├── signing_agent.py
+│   │   ├── template_agent.py
+│   │   └── action_parser.py
+│   │
+│   ├── 📂 db/                           ← Database clients & models
+│   │   ├── client.py
+│   │   ├── contracts.py
+│   │   ├── firebase_auth.py
+│   │   ├── firestore_client.py
+│   │   ├── invoices.py
+│   │   ├── leads.py
+│   │   ├── messages.py
+│   │   ├── models.py
+│   │   └── storage_client.py
+│   │
+│   ├── 📂 routes/                       ← API endpoints
+│   │   ├── chat.py
+│   │   ├── contracts.py
+│   │   ├── invoices.py
+│   │   ├── leads.py
+│   │   ├── signing.py
+│   │   └── webhooks.py
+│   │
+│   ├── 📂 templates/                    ← Email & document templates
+│   │
+│   ├── 📂 terraform/                    ← Infrastructure as Code (GCP)
+│   │   ├── main.tf                     ← Infrastructure definition
+│   │   ├── variables.tf                ← Terraform variables
+│   │   ├── terraform.tfvars.example    ← Configuration template
+│   │   └── backend.tf.example          ← State backend config
+│   │
+│   └── 📂 scripts/                      ← Utility scripts
+│       ├── clear_contracts.py
+│       ├── test_endpoints.py
+│       └── upload_templates.py
+│
+├── 📂 frontend/                         ⭐ FRONTEND APPLICATION (React/Vite)
+│   ├── 🐳 Dockerfile.frontend          ← Frontend container image
+│   │
+│   └── 📂 qtc-spark/                    ← React + Vite application
+│       ├── 📄 package.json             ← Node.js dependencies
+│       ├── 📄 vite.config.ts           ← Build configuration
+│       ├── 📄 tsconfig.json            ← TypeScript config
+│       ├── 📄 tailwind.config.ts       ← Styling config
+│       ├── 📄 playwright.config.ts     ← E2E testing config
+│       ├── 📄 eslint.config.js         ← Code linting config
+│       │
+│       ├── 📂 src/                      ← React source code
+│       │   ├── main.tsx                ← Application entry point
+│       │   ├── App.tsx                 ← Main App component
+│       │   │
+│       │   ├── 📂 components/          ← Reusable components
+│       │   │   ├── TopBar.tsx
+│       │   │   ├── AppSidebar.tsx
+│       │   │   ├── ProtectedRoute.tsx
+│       │   │   ├── StatusBadge.tsx
+│       │   │   ├── SkeletonCard.tsx
+│       │   │   ├── AnimatedCounter.tsx
+│       │   │   └── ui/                 ← UI component library
+│       │   │       ├── accordion.tsx
+│       │   │       ├── button.tsx
+│       │   │       ├── dialog.tsx
+│       │   │       ├── input.tsx
+│       │   │       ├── table.tsx
+│       │   │       └── ... (30+ UI components)
+│       │   │
+│       │   ├── 📂 pages/               ← Full page components
+│       │   │   ├── Index.tsx           ← Home page
+│       │   │   ├── LoginPage.tsx       ← Authentication
+│       │   │   ├── DashboardPage.tsx   ← Main dashboard
+│       │   │   ├── LeadsPage.tsx       ← Leads management
+│       │   │   ├── ContractsPage.tsx   ← Contracts management
+│       │   │   ├── InvoicesPage.tsx    ← Invoices management
+│       │   │   ├── ChatPage.tsx        ← AI chat interface
+│       │   │   ├── TemplatesPage.tsx   ← Templates management
+│       │   │   ├── ESignPage.tsx       ← E-signature
+│       │   │   └── NotFound.tsx        ← 404 page
+│       │   │
+│       │   ├── 📂 hooks/               ← Custom React hooks
+│       │   │   ├── use-mobile.tsx
+│       │   │   └── use-toast.ts
+│       │   │
+│       │   ├── 📂 lib/                 ← Utility libraries
+│       │   │   ├── api.ts              ← API client
+│       │   │   ├── firebase.ts         ← Firebase setup
+│       │   │   ├── utils.ts            ← Utility functions
+│       │   │   └── mock-data.ts        ← Test data
+│       │   │
+│       │   ├── 📂 context/             ← React context
+│       │   │   └── AuthContext.tsx     ← Auth state
+│       │   │
+│       │   └── 📂 test/                ← Tests
+│       │       ├── example.test.ts
+│       │       └── setup.ts
+│       │
+│       └── 📂 public/                  ← Static assets
+│           └── robots.txt
+│
+├── 📂 docs/                             ⭐ DOCUMENTATION
+│   ├── 📋 PRD.md
+│   ├── 📋 PRODUCT_DOCUMENTATION.md    ← 32 sections, technical deep dives
+│   ├── 📋 FEATURE_COMPARISON_ANALYSIS.md ← Feature gap analysis
+│   ├── 📋 FIXES_NEEDED_DOCUMENT.md    ← Roadmap with priorities
+│   ├── 📋 DEPLOYMENT_QUICKSTART.md    ← ⭐ START HERE (30 min)
+│   ├── 📋 DEPLOYMENT_GCP_GUIDE.md     ← Detailed GCP deployment
+│   ├── 📋 DEPLOYMENT_SYSTEM_SUMMARY.md ← Executive summary
+│   ├── 📋 CICD_GUIDE.md               ← CI/CD pipeline setup
+│   ├── 📋 DEPLOYMENT_CHECKLIST.md     ← Production sign-off
+│   └── 📋 Development Notes: day2.md, day3_lead_agent.md, day4_contract_agent.md, etc.
+│
+├── 📂 .github/                          ⭐ GITHUB CONFIGURATION
+│   └── 📂 workflows/
+│       └── deploy-gcp.yml             ← GitHub Actions CI/CD
+│
+├── 🌍 ROOT LEVEL
+│   ├── 🐳 cloudbuild.yaml             ← Google Cloud Build CI/CD
+│   ├── 📄 README.md                   ← Project overview & setup
+│   ├── 📄 STRUCTURE.md                ← This file (quick reference)
+│   ├── 📄 .gitignore                  ← Git ignore rules
+│   ├── 📄 .env                        ← Local environment (DO NOT COMMIT)
+│   ├── 📄 .env.example                ← Environment template
+│   └── 📂 .venv/                      ← Python virtual environment
+│
+└── 📂 __pycache__/                     (Python cache files)
+
+════════════════════════════════════════════════════════════════════════════
+                              KEY FEATURES
+════════════════════════════════════════════════════════════════════════════
+
+✅ CLEAN SEPARATION OF CONCERNS
+   • Backend: FastAPI, AI agents, database, routes
+   • Frontend: React, UI components, pages
+   • Infrastructure: Terraform for GCP
+   • Docs: All documentation in one place
+
+✅ PRODUCTION-READY
+   • Docker containers for both services
+   • Terraform IaC for complete GCP setup
+   • CI/CD pipelines (Cloud Build + GitHub Actions)
+   • Complete monitoring & logging setup
+
+✅ SCALABLE ARCHITECTURE
+   • Serverless (Cloud Run with auto-scaling)
+   • Multi-region Firestore database
+   • Cloud Storage for documents
+   • Secret Manager for API keys
+
+✅ COMPREHENSIVE DOCUMENTATION
+   • 30-minute quick start guide
+   • Detailed deployment guide
+   • Feature documentation
+   • CI/CD setup instructions
+   • Production checklist
+
+════════════════════════════════════════════════════════════════════════════
+                         QUICK START COMMANDS
+════════════════════════════════════════════════════════════════════════════
+
+1️⃣  LOCAL DEVELOPMENT
+    Backend:    cd backend && python main.py
+    Frontend:   cd frontend/qtc-spark && npm run dev
+
+2️⃣  PRODUCTION DEPLOYMENT (First Time)
+    cd backend && chmod +x setup-gcp.sh && ./setup-gcp.sh YOUR_PROJECT_ID
+
+3️⃣  CONFIGURE & DEPLOY
+    cd backend/terraform
+    cp terraform.tfvars.example terraform.tfvars
+    terraform init && terraform apply
+
+4️⃣  ENABLE CI/CD
+    Option A (GCP):  gcloud builds submit
+    Option B (GitHub): Add secrets, push to main
+
+════════════════════════════════════════════════════════════════════════════
+                            FILE STATISTICS
+════════════════════════════════════════════════════════════════════════════
+
+Backend Python Files:         18 files (main + agents + db + routes + scripts)
+Frontend Components:          30+ React components + pages
+Documentation:                10+ markdown files
+Infrastructure as Code:       4 Terraform files
+CI/CD Pipelines:              2 pipeline configurations
+Total Configuration Files:    15+ (.env, vite.config, tailwind, etc.)
+
+════════════════════════════════════════════════════════════════════════════
+                          NEXT STEPS
+════════════════════════════════════════════════════════════════════════════
+
+📖 Read:    docs/README.md and docs/STRUCTURE.md
+🚀 Deploy:  docs/DEPLOYMENT_QUICKSTART.md
+✅ Verify:  docs/DEPLOYMENT_CHECKLIST.md
+
+════════════════════════════════════════════════════════════════════════════
+Last Updated: March 16, 2026 | Status: ✅ FULLY ORGANIZED & PRODUCTION-READY
+════════════════════════════════════════════════════════════════════════════

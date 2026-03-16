@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{{company_name}} — Drafting Services Agreement</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #1A2E44;
+    --gold: #C8A96E;
+    --gold2: #E8C98A;
+    --cream: #F5F2ED;
+    --mid: #D6D0C6;
+    --char: #2D2D2D;
+    --muted: #6B6B6B;
+    --sans: 'Outfit', sans-serif;
+    --serif: 'EB Garamond', Georgia, serif;
+    --page-padding: 1.8rem 2.2rem;
+  }
+
+  /* ── RESET ───────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: #e8e8e8;
+    color: var(--char);
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* ═══════════════════════════════════════════
+     PDF / PRINT — these rules are what matter
+     for the actual generated PDF output.
+     ═══════════════════════════════════════════ */
+  @page {
+    size: A4;
+    margin: 0 !important;
+  }
+
+  @media print {
+    html, body {
+      width: 210mm;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #fff;
+    }
+    .pages-container {
+      padding: 0 !important;
+      gap: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+    }
+    .page {
+      width: 100% !important;
+      min-height: 0 !important;
+      height: 297mm !important;
+      max-width: none !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+    }
+    .page:last-child {
+      page-break-after: auto;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     SCREEN PREVIEW — simulates A4 pages
+     for browser viewing only.
+     ═══════════════════════════════════════════ */
+  .pages-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .page {
+    /* A4 aspect ratio preview at 96dpi: 794 × 1123 */
+    width: 794px;
+    min-height: 1123px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.14);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── PAGE HEADER (inner pages 2-4) ─────── */
+  .page-header {
+    background: var(--navy);
+    padding: 1rem 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .page-header .brand {
+    display: flex;
+    align-items: center;
+  }
+  .page-header .doc-meta {
+    text-align: right;
+  }
+  .page-header .doc-meta .meta-label {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+  }
+  .page-header .doc-meta .meta-val {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--gold2);
+    font-style: italic;
+  }
+
+  /* ── GOLD STRIPE ───────────────────────── */
+  .gold-stripe {
+    background: var(--gold);
+    padding: 0.28rem 2.2rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  /* ── PAGE CONTENT ───────────────────────── */
+  .page-content {
+    flex: 1 1 auto;
+    padding: var(--page-padding);
+    overflow: hidden;
+  }
+
+  /* ── PAGE FOOTER ───────────────────────── */
+  .page-footer {
+    background: var(--navy);
+    padding: 0.6rem 2.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: auto;
+    width: 100%;
+  }
+  .page-footer .footer-brand {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+  .page-footer .footer-contact {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.42);
+    text-align: center;
+    line-height: 1.6;
+  }
+  .page-footer .footer-page {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.42);
+    text-align: right;
+  }
+
+  /* ── COVER PAGE HEADER (page 1) ─────────── */
+  .cover-header {
+    background: var(--navy);
+    padding: 1.6rem 2.2rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .cover-header .hdr-logo {
+    display: flex;
+    align-items: center;
+  }
+  .logo-img {
+    height: 48px;
+    border-radius: 8px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .logo-img-header {
+    height: 32px;
+    border-radius: 6px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .hdr-date {
+    text-align: right;
+  }
+  .hdr-date label {
+    display: block;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    text-align: right;
+  }
+  .hdr-date .dv {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--gold2);
+    font-style: italic;
+    text-align: right;
+  }
+
+  /* ── OPENING CLAUSE ─────────────────────── */
+  .opening-clause {
+    background: var(--cream);
+    border-left: 5px solid var(--navy);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 1.4rem;
+    font-family: var(--serif);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    color: var(--char);
+  }
+
+  /* ── PARTIES GRID ───────────────────────── */
+  .parties-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 1.4rem;
+    border: 1px solid var(--mid);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .pcol { border-right: 1px solid var(--mid); }
+  .pcol:last-child { border-right: none; }
+  .pcol-hdr {
+    background: var(--navy);
+    color: var(--gold2);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.9rem;
+  }
+  .pcol-body { background: var(--cream); padding: 0.75rem 0.9rem; }
+  .pcol:last-child .pcol-body { background: #F9F7F4; }
+  .frow {
+    display: flex;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    margin-bottom: 0.22rem;
+    line-height: 1.45;
+  }
+  .flbl { color: var(--muted); min-width: 65px; font-size: 0.75rem; }
+
+  /* ── SECTION HEADER ─────────────────────── */
+  .sec-hdr {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 1.3rem 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .sec-badge {
+    background: var(--navy);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.63rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .sec-ttl {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+
+  .project-loc {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--cream);
+    border: 1px solid var(--mid);
+    border-radius: 4px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.83rem;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ── SCOPE ───────────────────────────────── */
+  .scope-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.32rem;
+  }
+  .scope-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--cream);
+    border: 1px solid var(--mid);
+    border-radius: 4px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.83rem;
+  }
+  .scope-item::before {
+    content: "✓";
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .scope-note {
+    margin-top: 0.75rem;
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+  }
+  .scope-note strong { color: var(--navy); font-style: normal; }
+
+  /* ── TERMS ───────────────────────────────── */
+  .terms-note {
+    background: var(--cream);
+    border-left: 3px solid var(--navy);
+    padding: 0.6rem 0.9rem;
+    margin: 0.45rem 0 0.45rem 0;
+    font-size: 0.78rem;
+    line-height: 1.65;
+    color: var(--char);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+  }
+  .terms-list { list-style: none; counter-reset: tc; }
+  .terms-list > li {
+    counter-increment: tc;
+    position: relative;
+    padding: 0.5rem 0 0.5rem 2rem;
+    font-size: 0.8rem;
+    line-height: 1.72;
+    border-bottom: 1px solid var(--mid);
+  }
+  .terms-list > li:last-child { border-bottom: none; }
+  .terms-list > li::before {
+    content: counter(tc)".";
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.82rem;
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+  }
+  .terms-list ol {
+    list-style: lower-alpha;
+    padding-left: 1.2rem;
+    margin-top: 0.35rem;
+  }
+  .terms-list ol li { margin-bottom: 0.35rem; font-size: 0.78rem; line-height: 1.65; }
+
+  /* ── PRICING ─────────────────────────────── */
+  .quote-banner {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 0.95rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .q-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .q-sub { font-size: 0.68rem; color: rgba(255,255,255,0.3); margin-top: 2px; font-style: italic; }
+  .q-amount { font-family: var(--serif); font-size: 1.9rem; font-weight: 600; color: var(--gold2); }
+  .pay-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 1rem; }
+  .pay-table th {
+    background: var(--cream);
+    color: var(--navy);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    border-bottom: 2px solid var(--gold);
+  }
+  .pay-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--mid); vertical-align: top; }
+  .pay-table tr:last-child td { border-bottom: none; }
+  .m-num { color: var(--gold); font-weight: 700; }
+  .opt-box {
+    background: var(--cream);
+    border: 1px dashed var(--gold);
+    border-radius: 4px;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.82rem;
+    margin-bottom: 1.2rem;
+  }
+  .opt-box strong {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    margin-bottom: 0.22rem;
+  }
+
+  /* ── SIGNATURES ──────────────────────────── */
+  .sig-intro {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--navy);
+    text-align: center;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--mid);
+    border-bottom: 1px solid var(--mid);
+    margin-bottom: 1.5rem;
+  }
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .sig-block { border-top: 2px solid var(--navy); padding-top: 0.75rem; }
+  .sig-role {
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .sig-line { border-bottom: 1px solid #aaa; height: 2.2rem; margin-bottom: 0.32rem; }
+  .sig-sub { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .sig-name { font-family: var(--serif); font-size: 0.88rem; color: var(--navy); }
+  .sig-meta { display: flex; gap: 1.5rem; margin-top: 0.55rem; }
+  .sig-mf { flex: 1; }
+  .sig-mf .ml { border-bottom: 1px solid #bbb; height: 1.5rem; margin-bottom: 0.22rem; }
+  .sig-mf .mlbl { font-size: 0.65rem; color: var(--muted); }
+
+  /* ── UTILITIES ───────────────────────────── */
+  .divider { height: 1px; background: var(--mid); margin: 1.1rem 0; }
+  .page-content p { font-size: 0.82rem; line-height: 1.7; color: var(--char); }
+</style>
+</head>
+<body>
+
+<div class="pages-container">
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- PAGE 1: COVER / PARTIES / PROJECT -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <header class="cover-header">
+      <div class="hdr-logo">
+        {{logo_img_html}}
+      </div>
+      <div class="hdr-date">
+        <label>Agreement Date</label>
+        <div class="dv">{{agreement_date}}</div>
+      </div>
+    </header>
+    <div class="gold-stripe">Agreement &nbsp;|&nbsp; Confidential</div>
+
+    <div class="page-content">
+
+      <div class="opening-clause">
+        This Agreement is entered into on <strong>{{agreement_date}}</strong>
+        between <strong>{{company_name}}</strong> (hereinafter &#x201C;Drafter&#x201D;) and
+        <strong>{{customer_name}}</strong> &#x2014;
+        <strong>{{customer_signatory}}</strong>
+        (hereinafter &#x201C;Customer&#x201D; or &#x201C;Owner&#x201D;).
+      </div>
+
+      <div class="parties-grid">
+        <div class="pcol">
+          <div class="pcol-hdr">Customer Information</div>
+          <div class="pcol-body">
+            <div class="frow"><span class="flbl">Customer:</span><span>{{customer_name}}</span></div>
+            <div class="frow"><span class="flbl">Signatory:</span><span>{{customer_signatory}}</span></div>
+            <div class="frow"><span class="flbl">Address:</span><span>{{customer_address}}</span></div>
+          </div>
+        </div>
+        <div class="pcol">
+          <div class="pcol-hdr">Drafter Information</div>
+          <div class="pcol-body">
+            <div class="frow"><span class="flbl">Drafter:</span><span>{{drafter_name}} / {{company_name}}</span></div>
+            <div class="frow"><span class="flbl">Address:</span><span>{{company_address}}</span></div>
+            <div class="frow"><span class="flbl">Phone:</span><span>{{company_phone}}</span></div>
+            <div class="frow"><span class="flbl">Email:</span><span>{{company_email}}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-hdr"><span>For the Following Project</span></div>
+      <div class="project-loc">
+        <strong>Project Location:</strong>&nbsp;<span>{{project_location}}</span>
+      </div>
+      <p style="margin-bottom: 1.1rem;">
+        {{scope_type_description}} The work will include the tasks outlined in <strong>Article A: Scope of Work</strong>, as follows:
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="sec-hdr">
+        <span class="sec-badge">A</span>
+        <span class="sec-ttl">Scope of Work</span>
+      </div>
+
+      <ul class="scope-items">
+        {{scope_items_html}}
+      </ul>
+
+      <div class="scope-note">
+        <strong>Note:</strong> Any work not listed above falls outside the scope of this agreement and will require a separate signed Change Order.
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-brand">{{company_name}}</div>
+      <div class="footer-contact">{{company_address}} &nbsp;|&nbsp; {{company_phone}} &nbsp;|&nbsp; {{company_email}}</div>
+      <div class="footer-page">Page 1</div>
+    </footer>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- PAGE 2: TERMS & CONDITIONS (Terms 1–13) -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <header class="page-header">
+      <div class="hdr-logo">
+        {{logo_img_html}}
+      </div>
+      <div class="doc-meta">
+        <div class="meta-label">Agreement Date</div>
+        <div class="meta-val">{{agreement_date}}</div>
+      </div>
+    </header>
+    <div class="gold-stripe">Article B — Terms &amp; Conditions (continued on next page)</div>
+
+    <div class="page-content">
+
+      <div class="sec-hdr">
+        <span class="sec-badge">B</span>
+        <span class="sec-ttl">Terms and Conditions</span>
+      </div>
+
+      <ol class="terms-list">
+        <li>All project specifications and limitations are provided by the Customer(s) upfront. The Drafter is only assisting in the drawings of the plans as set forth in the &#x2018;Scope of Work.&#x2019; The Drafter shall perform its services consistent with the ordinary standard of care exercised by similar professionals in similar circumstances at the same time and locality.</li>
+        <li>Drafter is responsible only for design and drafting, and will try to best assist Customers in obtaining permits for the scope of work mentioned above. However, permits are subject to city inspection and code compliance, and city decisions will not have any bearing on the successful completion of the project. The Customer(s) are responsible for ensuring the safety and code compliance of the structure as per local laws and building codes during or after construction.</li>
+        <li>All drawings, plans, specifications, models, calculations, reports and other documents prepared by <strong>{{company_name}}</strong> in connection with the Project (collectively, the &#x201C;Instruments of Service&#x201D;) are and shall remain the sole and exclusive property of <strong>{{company_name}}</strong> and/or the Drafter, protected by copyright and other intellectual property laws.
+          <ol type="a">
+            <li>Upon full and final payment of all fees due, the Customer is granted a limited, non-exclusive, non-transferable license to use the Instruments of Service solely for the purpose of constructing, permitting, maintaining, and using the specific Project at the specific site identified in this Agreement.</li>
+            <li>Any use, modification, or re-use of the Instruments of Service without written consent shall be at the sole risk of the Customer. The Customer agrees to defend, indemnify, and hold harmless <strong>{{company_name}}</strong> from all claims arising out of unauthorized use.</li>
+            <li>Customer(s) allow drafters to use de-anonymized project output for marketing purposes. The copyright of the drawings is owned by the drafters.</li>
+          </ol>
+        </li>
+        <li>All personal identification information of the Customers will remain confidential with the drafters and will not be used for any purpose without the Customer&#x2019;s prior consent.</li>
+        <li>Drafter will use reasonable safeguards but is not strictly liable for data breaches beyond its reasonable control.</li>
+        <li>Payments due and not paid under the Contract Documents shall bear interest from the date payment is due at an annual rate of 20 percent.</li>
+        <li>Three rounds of iterations and plan check corrections from the city are included in the price. Any changes in scope as agreed at signing will require a &#x201C;Change Order&#x201D; (See Term 13).</li>
+        <li>It is the Customer&#x2019;s responsibility to inform the drafter about feedback and approval from the city within seven (7) days, especially when the event triggers a payment.</li>
+        <li>Drafter will not be responsible for structural calculations or any work specifically requiring an Architect or Engineering License. If required, Drafter may coordinate with a licensed architect or engineer, acting solely as a coordination agent.</li>
+        <li>To the fullest extent permitted by law, the Customer agrees to defend, indemnify, and hold harmless <strong>{{company_name}}</strong> and the Drafter from all claims, demands, liabilities, losses, damages, costs, and expenses (including reasonable attorneys&#x2019; fees) arising out of or relating to:
+          <ol type="a">
+            <li>The construction, implementation, use, modification, or maintenance of the Project;</li>
+            <li>The use, misuse, or unauthorized re-use of any drawings, plans, or deliverables prepared by the Drafter;</li>
+            <li>Bodily injury, death, or damage to real or personal property occurring at the Project site;</li>
+            <li>Any failure by the Customer or their contractors to comply with applicable laws, codes, or regulations;</li>
+            <li>Any breach by the Customer of this Agreement.</li>
+          </ol>
+          <div class="terms-note">This indemnity expressly includes claims made by third parties. The foregoing indemnity shall not require indemnification where a claim is finally determined to have been proximately caused by the gross negligence or willful misconduct of the Indemnified Party.</div>
+        </li>
+        <li>Drafter has no responsibility for construction means and methods, site safety, or maintenance. The Customer and their contractor are solely responsible for code compliance during and after construction.</li>
+        <li>Drafter is not responsible for Fire and Sanitary Department permits or any additional work beyond the &#x2018;Scope of Work.&#x2019;</li>
+        <li>&#x201C;Change Orders&#x201D; resulting from extra work become part of the contract once the order is prepared in writing and signed by both Parties prior to commencement of any Work covered by the new Change Order.</li>
+      </ol>
+
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-brand">{{company_name}}</div>
+      <div class="footer-contact">{{company_address}} &nbsp;|&nbsp; {{company_phone}} &nbsp;|&nbsp; {{company_email}}</div>
+      <div class="footer-page">Page 2</div>
+    </footer>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- PAGE 3: TERMS & CONDITIONS (Terms 14–25) -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <header class="page-header">
+      <div class="hdr-logo">
+        {{logo_img_html}}
+      </div>
+      <div class="doc-meta">
+        <div class="meta-label">Agreement Date</div>
+        <div class="meta-val">{{agreement_date}}</div>
+      </div>
+    </header>
+    <div class="gold-stripe">Article B — Terms &amp; Conditions (continued)</div>
+
+    <div class="page-content">
+
+      <div class="sec-hdr">
+        <span class="sec-badge">B</span>
+        <span class="sec-ttl">Terms and Conditions <span style="font-weight:300;color:var(--muted)">(continued)</span></span>
+      </div>
+
+      <ol class="terms-list" style="counter-reset: tc 13;">
+        <li>Drafter and Customer mutually commit to use reasonable care to meet the requirements of state, federal, and local law. Drafter has no duty to update drawings for changes in laws or codes after completion unless separately engaged.</li>
+        <li>Drawings and calculations are for one-time use at the specific site only. Any re-use is prohibited. The customer shall defend, indemnify, and hold the drafter harmless from any claims arising out of unauthorized use or re-use.</li>
+        <li>The Customer is responsible for verifying all existing site conditions and dimensions with their contractors before construction or material orders begin. Design drawings are for reference only and must not be used for construction without field verification.</li>
+        <li>All plans will be delivered as PDF files via email &#x2014; no hard copy will be provided. Drafter is not responsible for email delivery failures or the Customer&#x2019;s inability to open files.</li>
+        <li>To the fullest extent permitted by law, the total aggregate liability of <strong>{{company_name}}</strong> arising out of or relating to this Agreement shall be limited to an amount not to exceed the total fees actually paid by the Customer for the specific Project.
+          <ol type="a">
+            <li>In no event shall any of the <strong>{{company_name_short}}</strong> Parties be liable for any indirect, special, incidental, consequential, exemplary, or punitive damages of any kind.</li>
+            <li>The Customer acknowledges that <strong>{{company_name}}</strong> has set its fees in reliance upon this limitation of liability, which is an essential part of the bargain between the parties.</li>
+          </ol>
+        </li>
+        <li>Both parties may terminate this agreement when unable to reach common ground. Upon termination, the client shall reimburse the drafter for total hours invested at USD $85/Hr, not to exceed the project price quoted in this agreement.</li>
+        <li>This proposal, as written, must be incorporated as part of the quotes document in any resulting agreement.</li>
+        <li>Unless otherwise provided, the Customer shall provide full information in a timely manner regarding requirements for and limitations on the Project.</li>
+        <li>No third-party claims or beneficiaries: This agreement solely benefits the parties herein and their respective permitted successors.</li>
+        <li>Relationship of parties: Nothing in this agreement creates any agency, joint venture, partnership, or other form of joint enterprise or fiduciary relationship between the parties.</li>
+        <li>Drafter may slow or stop work, without liability or penalty, if payment has not been received within ten (10) days of submission.</li>
+        <li>All disputes arising under this Agreement are subject to the exclusive jurisdiction of San Mateo County, California.</li>
+      </ol>
+
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-brand">{{company_name}}</div>
+      <div class="footer-contact">{{company_address}} &nbsp;|&nbsp; {{company_phone}} &nbsp;|&nbsp; {{company_email}}</div>
+      <div class="footer-page">Page 3</div>
+    </footer>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- PAGE 4: PRICING & SIGNATURES -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <header class="page-header">
+      <div class="hdr-logo">
+        {{logo_img_html}}
+      </div>
+      <div class="doc-meta">
+        <div class="meta-label">Agreement Date</div>
+        <div class="meta-val">{{agreement_date}}</div>
+      </div>
+    </header>
+    <div class="gold-stripe">Article C — Pricing &amp; Signatures</div>
+
+    <div class="page-content">
+
+      <div class="sec-hdr">
+        <span class="sec-badge">C</span>
+        <span class="sec-ttl">Pricing &amp; Payment Method</span>
+      </div>
+
+      <p style="margin-bottom: 1rem;">
+        The Customer shall pay the Drafter a total project fee of <strong>{{quote_amount}}</strong> upon receiving the set of drawings requested, based on the following payment schedule:
+      </p>
+
+      <div class="quote-banner">
+        <div>
+          <div class="q-label">Total Project Fee</div>
+          <div class="q-sub">As quoted and agreed upon</div>
+        </div>
+        <div class="q-amount">{{quote_amount}}</div>
+      </div>
+
+      <p style="font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem;">Payment Schedule (Milestone for Invoice)</p>
+      <table class="pay-table">
+        <thead>
+          <tr>
+            <th style="width:100px">Milestone</th>
+            <th>Description / Trigger Event</th>
+            <th style="width:105px; text-align:right">Amount Due</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="m-num">{{milestone_1_label}}</td><td>{{milestone_1_description}}</td><td style="text-align:right">{{milestone_1_amount}}</td></tr>
+          <tr><td class="m-num">{{milestone_2_label}}</td><td>{{milestone_2_description}}</td><td style="text-align:right">{{milestone_2_amount}}</td></tr>
+          <tr><td class="m-num">{{milestone_3_label}}</td><td>{{milestone_3_description}}</td><td style="text-align:right">{{milestone_3_amount}}</td></tr>
+        </tbody>
+      </table>
+
+      <div class="opt-box">
+        <strong>Optional Services</strong>
+        {{optional_services}}
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="sig-intro">This agreement is entered into as of the date written below.</div>
+      <div class="sig-grid">
+        <div class="sig-block">
+          <div class="sig-role">Signatory</div>
+          <div class="sig-line"></div>
+          <div class="sig-sub">Signature</div>
+          <div class="sig-name">{{customer_name}}</div>
+          <div class="sig-meta">
+            <div class="sig-mf"><div class="ml"></div><div class="mlbl">Date: {{customer_date}}</div></div>
+            <div class="sig-mf"><div class="ml"></div><div class="mlbl">Place: {{customer_place}}</div></div>
+          </div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-role">Drafter / {{company_name}}</div>
+          <div class="sig-line"></div>
+          <div class="sig-sub">Signature</div>
+          <div class="sig-name">{{drafter_name}} / {{company_name}}</div>
+          <div class="sig-meta">
+            <div class="sig-mf"><div class="ml"></div><div class="mlbl">Date: {{drafter_date}}</div></div>
+            <div class="sig-mf"><div class="ml"></div><div class="mlbl">Place: {{drafter_place}}</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-brand">{{company_name}}</div>
+      <div class="footer-contact">{{company_address}} &nbsp;|&nbsp; {{company_phone}} &nbsp;|&nbsp; {{company_email}}</div>
+      <div class="footer-page">Page 4</div>
+    </footer>
+  </div>
+
+</div>
+
+</body>
+</html>

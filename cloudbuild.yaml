@@ -1,0 +1,141 @@
+# CloudBuild Configuration - Builds and deploys to Cloud Run
+# This pipeline runs on every push to main branch
+
+steps:
+  # Step 1: Build backend Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-backend'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/qtc-backend:$SHORT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/qtc-backend:latest'
+      - '-f'
+      - 'Dockerfile'
+      - '.'
+
+  # Step 2: Push backend image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-backend'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/qtc-backend:$SHORT_SHA'
+
+  # Step 3: Build frontend Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-frontend'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/qtc-frontend:$SHORT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/qtc-frontend:latest'
+      - '-f'
+      - 'Dockerfile.frontend'
+      - '.'
+
+  # Step 4: Push frontend image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-frontend'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/qtc-frontend:$SHORT_SHA'
+
+  # Step 5: Deploy backend to Cloud Run
+  - name: 'gcr.io/cloud-builders/run'
+    id: 'deploy-backend'
+    args:
+      - 'deploy'
+      - 'qtc-backend'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/qtc-backend:$SHORT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '512Mi'
+      - '--cpu'
+      - '1'
+      - '--timeout'
+      - '3600'
+      - '--set-env-vars'
+      - 'DISABLE_AUTH=false,GOOGLE_APPLICATION_CREDENTIALS=/var/secrets/gcp/credentials.json'
+      - '--set-cloudsql-instances'
+      - '${PROJECT_ID}:us-central1:qtc-firestore'
+      - '--service-account'
+      - 'qtc-backend-sa@${PROJECT_ID}.iam.gserviceaccount.com'
+
+  # Step 6: Deploy frontend to Cloud Run
+  - name: 'gcr.io/cloud-builders/run'
+    id: 'deploy-frontend'
+    args:
+      - 'deploy'
+      - 'qtc-frontend'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/qtc-frontend:$SHORT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '256Mi'
+      - '--cpu'
+      - '1'
+      - '--timeout'
+      - '3600'
+      - '--service-account'
+      - 'qtc-frontend-sa@${PROJECT_ID}.iam.gserviceaccount.com'
+
+  # Step 7: Run smoke tests
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'smoke-tests'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -e
+        echo "Testing backend health endpoint..."
+        BACKEND_URL=$(gcloud run services describe qtc-backend --region us-central1 --format='value(status.url)')
+        curl -f "${BACKEND_URL}/health" || exit 1
+        echo "✓ Backend health check passed"
+        
+        echo "Testing frontend endpoint..."
+        FRONTEND_URL=$(gcloud run services describe qtc-frontend --region us-central1 --format='value(status.url)')
+        curl -f "${FRONTEND_URL}/" || exit 1
+        echo "✓ Frontend is accessible"
+
+  # Step 8: Notify deployment success
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    id: 'notify-success'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "🎉 Deployment successful!"
+        echo "Backend: https://qtc-backend-[SHORT_SHA].run.app"
+        echo "Frontend: https://qtc-frontend-[SHORT_SHA].run.app"
+        echo "Commit: ${COMMIT_SHA}"
+        echo "Branch: ${BRANCH_NAME}"
+
+# Images to push to registry
+images:
+  - 'gcr.io/$PROJECT_ID/qtc-backend:$SHORT_SHA'
+  - 'gcr.io/$PROJECT_ID/qtc-frontend:$SHORT_SHA'
+
+# Options
+options:
+  machineType: 'N1_HIGHCPU_8'
+  logging: CLOUD_LOGGING_ONLY
+  
+# Build timeout
+timeout: '3600s'
+
+# Substitutions (can be overridden)
+substitutions:
+  _REGION: 'us-central1'
+  _BACKEND_SERVICE: 'qtc-backend'
+  _FRONTEND_SERVICE: 'qtc-frontend'

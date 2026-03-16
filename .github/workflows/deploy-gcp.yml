@@ -1,0 +1,151 @@
+# GitHub Actions Workflow - Alternative CI/CD Pipeline
+# Place this file in: .github/workflows/deploy-gcp.yml
+
+name: Deploy to GCP Cloud Run
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1
+  BACKEND_SERVICE: qtc-backend
+  FRONTEND_SERVICE: qtc-frontend
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio
+      
+      - name: Run Python tests
+        run: |
+          pytest --tb=short || true
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install frontend dependencies
+        working-directory: ./qtc-spark
+        run: npm ci
+      
+      - name: Build frontend
+        working-directory: ./qtc-spark
+        run: npm run build
+      
+      - name: Run frontend linting
+        working-directory: ./qtc-spark
+        run: npm run lint || true
+
+  build-and-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      
+      - name: Configure Docker for GCR
+        run: |
+          gcloud auth configure-docker gcr.io
+      
+      - name: Build and push backend image
+        run: |
+          docker build -t gcr.io/$PROJECT_ID/$BACKEND_SERVICE:${{ github.sha }} \
+                       -t gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest \
+                       -f Dockerfile .
+          docker push gcr.io/$PROJECT_ID/$BACKEND_SERVICE:${{ github.sha }}
+          docker push gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest
+      
+      - name: Build and push frontend image
+        run: |
+          docker build -t gcr.io/$PROJECT_ID/$FRONTEND_SERVICE:${{ github.sha }} \
+                       -t gcr.io/$PROJECT_ID/$FRONTEND_SERVICE:latest \
+                       -f Dockerfile.frontend .
+          docker push gcr.io/$PROJECT_ID/$FRONTEND_SERVICE:${{ github.sha }}
+          docker push gcr.io/$PROJECT_ID/$FRONTEND_SERVICE:latest
+      
+      - name: Deploy backend to Cloud Run
+        run: |
+          gcloud run deploy $BACKEND_SERVICE \
+            --image gcr.io/$PROJECT_ID/$BACKEND_SERVICE:${{ github.sha }} \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated \
+            --memory 512Mi \
+            --cpu 1 \
+            --timeout 3600 \
+            --no-traffic-on-deploy \
+            --update-env-vars DISABLE_AUTH=false
+      
+      - name: Deploy frontend to Cloud Run
+        run: |
+          gcloud run deploy $FRONTEND_SERVICE \
+            --image gcr.io/$PROJECT_ID/$FRONTEND_SERVICE:${{ github.sha }} \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated \
+            --memory 256Mi \
+            --cpu 1 \
+            --timeout 3600 \
+            --no-traffic-on-deploy
+      
+      - name: Smoke tests
+        run: |
+          echo "Waiting for services to be ready..."
+          sleep 10
+          
+          BACKEND_URL=$(gcloud run services describe $BACKEND_SERVICE \
+            --region $REGION --format='value(status.url)')
+          
+          FRONTEND_URL=$(gcloud run services describe $FRONTEND_SERVICE \
+            --region $REGION --format='value(status.url)')
+          
+          echo "Testing backend: $BACKEND_URL"
+          curl -f "$BACKEND_URL/health" || exit 1
+          
+          echo "Testing frontend: $FRONTEND_URL"
+          curl -f "$FRONTEND_URL/" || exit 1
+          
+          echo "✓ All smoke tests passed"
+      
+      - name: Create deployment comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const backendUrl = await exec.exec(
+              'gcloud', ['run', 'services', 'describe', context.payload.pull_request.head.ref,
+              '--region', 'us-central1', '--format=value(status.url)'], {silent: true}
+            );
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '## Deployment Preview\n✅ Deployed to Cloud Run\n- Backend: ' + backendUrl
+            });

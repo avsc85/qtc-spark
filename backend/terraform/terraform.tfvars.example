@@ -1,0 +1,29 @@
+# Terraform - Environment-specific variables for production
+# File: terraform/terraform.tfvars.example
+# Copy to: terraform/terraform.tfvars and fill in values
+
+project_id  = "your-gcp-project-id"
+region      = "us-central1"
+app_name    = "qtc"
+environment = "prod"
+
+backend_service_account_email = "qtc-backend-sa@your-gcp-project-id.iam.gserviceaccount.com"
+frontend_service_account_email = "qtc-frontend-sa@your-gcp-project-id.iam.gserviceaccount.com"
+
+backend_memory  = "512Mi"
+backend_cpu     = "1"
+frontend_memory = "256Mi"
+frontend_cpu    = "1"
+
+max_instances = 10
+min_instances = 0
+
+enable_cdn = true
+
+firestore_region   = "us-central1"
+gcs_bucket_name    = "qtc-documents-prod"
+
+# Sensitive variables (add to terraform.tfvars.secret or use environment)
+# openai_api_key = "sk-..."
+# stripe_api_key = "sk_live_..."
+# stripe_webhook_secret = "whsec_..."
